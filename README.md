@@ -1,97 +1,116 @@
-# Logistic Regression Model for Heart Disease Prediction
+# Heart Disease Prediction Models - Comparative Study
 
 ## Project Overview
-This project implements a complete machine learning pipeline to predict whether a patient has heart disease using the **Cardiovascular Disease Dataset**. The model uses **Logistic Regression** for binary classification (disease vs. no disease).
+This project implements three different machine learning pipelines to predict whether a patient has heart disease using the **Cardiovascular Disease Dataset**. The project compares three popular classification algorithms:
+- **Decision Tree**
+- **Logistic Regression**
+- **Random Forest**
+
+Each branch contains a complete ML implementation for binary classification (disease vs. no disease).
 
 ## Dataset
 - **Name**: Cardiovascular Disease Dataset
-- **File**: `Logistic/Cardiovascular_Disease_Dataset.csv`
 - **Target Variable**: `target` (1 = Disease, 0 = No Disease)
 - **Features**: 13 patient health metrics (age, gender, blood pressure, cholesterol, etc.)
+- **Location**: Available in each branch's folder
 
-## Machine Learning Pipeline
+## Common Machine Learning Pipeline
 
-### 1. Data Understanding & Exploration
-- Load and inspect dataset shape and structure
-- Display basic statistics and data types
-- Identify and remove unwanted ID columns
+All three models follow this standardized pipeline:
 
-### 2. Data Cleaning
-- Handle missing values (median for numerical, mode for categorical)
-- Remove duplicate rows
-- Verify data consistency and quality
+1. **Data Understanding & Exploration**: Load, inspect, and analyze dataset structure
+2. **Data Cleaning**: Handle missing values, remove duplicates, ensure data quality
+3. **Exploratory Data Analysis (EDA)**: Analyze distributions, correlations, and relationships
+4. **Feature Selection**: Rank and select important features
+5. **Outlier Detection & Handling**: Use IQR method to detect and handle outliers
+6. **Data Preprocessing**: Encode categorical variables and scale numerical features
+7. **Train-Test Split**: 80% training, 20% testing with stratification
+8. **Model Training**: Train the specific algorithm
+9. **Overfitting Check**: Compare training vs testing performance
+10. **Model Evaluation**: Calculate metrics (Accuracy, Precision, Recall, F1-Score, etc.)
+11. **Feature Importance Analysis**: Understand which features drive predictions
+12. **Model Saving**: Save trained model and preprocessing objects
+13. **Prediction on New Data**: Generate predictions on unseen data
 
-### 3. Exploratory Data Analysis (EDA)
-- Analyze target variable distribution
-- Generate correlation heatmap
-- Visualize feature distributions
-- Identify relationships with target variable
+## Branch Details
 
-### 4. Feature Selection
-- Rank features by correlation with target
-- Decision: Keep all features for comprehensive analysis
-- Total: 12 features (excluding target)
+### 1. Decision Tree Branch
+**Location**: `decision-tree` branch / `Decision tree/` folder
 
-### 5. Outlier Detection & Handling
-- Use IQR (Interquartile Range) method
-- Detect outliers in numerical features
-- Cap outliers using IQR bounds (winsorization)
-- Visualize before/after boxplots
+**Model**: Decision Tree Classifier
+- **File**: `decisiontree.ipynb`
+- **Saved Models**:
+  - `heart_disease_decision_tree_model.pkl`
+  - `heart_disease_decision_tree_model.joblib`
+  - `feature_names.joblib`
 
-### 6. Data Preprocessing
-- **Encoding**: Convert categorical variables using Label Encoding
-- **Scaling**: Standardize numerical features with StandardScaler
-- Mean: ~0.0, Std: ~1.0 for normalized features
+**Key Characteristics**:
+- Interpretable tree-based model
+- No scaling required
+- Good for capturing non-linear relationships
+- Prone to overfitting (large trees)
 
-### 7. Train-Test Split
-- 80% Training data
-- 20% Testing data
-- Stratified split to maintain class distribution
-- Random state: 42 (reproducibility)
+**Use Case**: When interpretability and understanding decision paths are important
 
-### 8. Model Training
-- **Algorithm**: Logistic Regression
-- **Solver**: lbfgs (Limited-memory BFGS)
-- **Max Iterations**: 1000
-- **Parameters**: Random state = 42
+---
 
-### 9. Overfitting Check
-- Compare training vs testing accuracy
-- Analyze generalization performance
-- Detect underfitting/overfitting
+### 2. Logistic Regression Branch
+**Location**: `logistic` branch / `Logistic/` folder
 
-### 10. Model Evaluation
-Metrics used:
-- **Accuracy**: Overall correctness
-- **Confusion Matrix**: TP, TN, FP, FN analysis
-- **Sensitivity (Recall)**: True Positive Rate
-- **Specificity**: True Negative Rate
-- **Precision**: Positive Prediction Value
-- **F1-Score**: Harmonic mean of Precision & Recall
-- **Classification Report**: Per-class performance
+**Model**: Logistic Regression
+- **File**: `logistic.ipynb`
+- **Saved Models**:
+  - `logistic_regression_model.joblib`
+  - `scaler.joblib`
+  - `model_info.txt`
 
-### 11. Model Saving
-- Trained model: `logistic_regression_model.joblib`
-- Scaler: `scaler.joblib`
-- Model info: `model_info.txt`
+**Key Characteristics**:
+- Linear classification model
+- Requires feature scaling
+- Fast training and inference
+- Good baseline model
+- Provides probability estimates
 
-### 12. Prediction on New Data
-- Load trained model and scaler
-- Preprocess new data
-- Generate predictions
+**Use Case**: Fast, interpretable probabilistic predictions
+
+---
+
+### 3. Random Forest Branch
+**Location**: `random-forest` branch / `random forest/` folder
+
+**Model**: Random Forest Classifier
+- **File**: `random_forest.ipynb` (or similar)
+- **Key Characteristics**:
+  - Ensemble of multiple decision trees
+  - Reduces overfitting through averaging
+  - Captures complex patterns
+  - Provides feature importance scores
+  - No scaling required
+
+**Use Case**: When high accuracy is needed with reduced overfitting
 
 ## Project Structure
 ```
 ML-Assignment-/
+├── Decision tree/
+│   ├── decisiontree.ipynb                        # Decision Tree ML pipeline
+│   ├── heart_disease_decision_tree_model.pkl     # Trained model (pickle format)
+│   ├── heart_disease_decision_tree_model.joblib  # Trained model (joblib format)
+│   ├── feature_names.joblib                      # Feature names
+│   └── Cardiovascular_Disease_Dataset.csv        # Input dataset
 ├── Logistic/
-│   ├── logistic.ipynb                        # Main notebook with complete ML pipeline
-│   ├── Cardiovascular_Disease_Dataset.csv    # Input dataset
-│   ├── logistic_regression_model.joblib      # Trained model
-│   ├── scaler.joblib                         # Feature scaler
-│   ├── model_info.txt                        # Model performance metrics
-│   ├── README.md                             # Project documentation
-│   └── additional.txt                        # Additional notes
-└── README.md                                 # This file
+│   ├── logistic.ipynb                            # Logistic Regression ML pipeline
+│   ├── Cardiovascular_Disease_Dataset.csv        # Input dataset
+│   ├── logistic_regression_model.joblib          # Trained model
+│   ├── scaler.joblib                             # Feature scaler
+│   ├── model_info.txt                            # Model performance metrics
+│   └── README.md                                 # Detailed documentation
+├── random forest/
+│   ├── random_forest.ipynb                       # Random Forest ML pipeline
+│   ├── random_forest_model.joblib                # Trained model
+│   ├── Cardiovascular_Disease_Dataset.csv        # Input dataset
+│   └── feature_importance.joblib                 # Feature importance scores
+└── README.md                                     # This file
 ```
 
 ## Installation & Requirements
@@ -112,45 +131,126 @@ joblib
 3. Navigate to project folder
 4. Open Jupyter Notebook: `jupyter notebook logistic.ipynb`
 
-## Model Performance (Latest)
-- **Test Accuracy**: Check `model_info.txt` for latest metrics
-- **Key Metrics**: Sensitivity, Specificity, Precision, F1-Score included
-- **Training Samples**: ~80% of dataset
-- **Testing Samples**: ~20% of dataset
+## Model Performance Summary
+
+### Evaluation Metrics (Common to All Models)
+- **Accuracy**: Overall correctness of predictions
+- **Confusion Matrix**: TP, TN, FP, FN analysis
+- **Sensitivity (Recall)**: True Positive Rate (Disease detection rate)
+- **Specificity**: True Negative Rate (Healthy detection rate)
+- **Precision**: Positive Prediction Value
+- **F1-Score**: Harmonic mean of Precision & Recall
+
+Check each branch's documentation for specific model performance metrics.
+
+### Model Comparison
+| Metric | Decision Tree | Logistic Regression | Random Forest |
+|--------|---------------|-------------------|---------------|
+| Training | Fast | Fast | Medium |
+| Prediction | Very Fast | Very Fast | Fast |
+| Interpretability | High | High | Medium |
+| Scalability | Good | Excellent | Good |
+| Overfitting Risk | High | Low | Low |
 
 ## Usage
 
-### Loading & Using the Trained Model
+### Loading & Using the Decision Tree Model
+```python
+import joblib
+import pandas as pd
+
+# Load model and feature names
+model = joblib.load('Decision tree/heart_disease_decision_tree_model.joblib')
+feature_names = joblib.load('Decision tree/feature_names.joblib')
+
+# Prepare new patient data
+new_data = pd.DataFrame({...})  # Your patient data
+
+# Predict (no scaling needed)
+prediction = model.predict(new_data)
+probability = model.predict_proba(new_data)
+```
+
+### Loading & Using the Logistic Regression Model
 ```python
 import joblib
 import pandas as pd
 
 # Load model and scaler
-model = joblib.load('logistic_regression_model.joblib')
-scaler = joblib.load('scaler.joblib')
+model = joblib.load('Logistic/logistic_regression_model.joblib')
+scaler = joblib.load('Logistic/scaler.joblib')
 
-# Prepare new patient data
+# Prepare and scale new patient data
 new_data = pd.DataFrame({...})  # Your patient data
-
-# Preprocess and predict
 new_data_scaled = scaler.transform(new_data)
+
+# Predict
 prediction = model.predict(new_data_scaled)
 probability = model.predict_proba(new_data_scaled)
 ```
 
-## Git Branches
-- **main**: Main production branch
-- **logistic**: Development branch with complete ML implementation
-- Other branches: decision-tree, random-forest, svm (alternative models)
+### Loading & Using the Random Forest Model
+```python
+import joblib
+import pandas as pd
 
-## Commits Timeline
-- March 5: Folder structure updated
-- March 6: Added markdown and dataset
-- March 8: Data cleaning and EDA
-- March 15: Feature selection and outlier handling
-- March 16: Data preprocessing and model training
-- March 20: Overfitting check and model evaluation
-- March 22: Model saving and finalization
+# Load model
+model = joblib.load('random forest/random_forest_model.joblib')
+
+# Prepare new patient data
+new_data = pd.DataFrame({...})  # Your patient data
+
+# Predict (no scaling needed)
+prediction = model.predict(new_data)
+probability = model.predict_proba(new_data)
+
+# Get feature importance
+feature_importance = model.feature_importances_
+```
+
+## Git Branches
+
+| Branch | Model | Description |
+|--------|-------|-------------|
+| `main` | - | Main production branch |
+| `decision-tree` | Decision Tree | Tree-based classifier for interpretable predictions |
+| `logistic` | Logistic Regression | Linear classifier for baseline probabilistic model |
+| `random-forest` | Random Forest | Ensemble model for improved accuracy and robustness |
+
+Each branch contains:
+- Complete ML pipeline in a Jupyter notebook
+- Trained model artifacts
+- Feature preprocessing information
+- Commit history showing development stages
+
+## Development Timeline
+
+### Decision Tree Branch (Current)
+- March 3: Dataset added
+- March 3: Import libraries
+- March 3: Import packages
+- March 8: Load dataset and inspect basic structure
+- March 8: Clean dataset and handle missing values
+- March 9: Add exploratory data analysis and summary statistics
+- March 10: Feature selection
+- March 11: Outlier detection
+- March 13: Data preprocessing
+- March 15: Train test splitting
+- March 16: Train test splitting updated
+- March 16: Model training
+- March 17: Model visualizing
+- March 19: Feature importance analysis
+- March 20: Overfitting check
+- March 20: Model evaluation
+- March 21: Model saving
+- March 23: Prediction on new data
+- March 23: Summary and key takeaways added
+- March 23: Model outputs
+
+### Other Branches
+- **logistic**: Complete ML pipeline with Logistic Regression
+- **random-forest**: Complete ML pipeline with Random Forest
+- **main**: Stable production branch
 
 ## Author
 Nandun Perera
