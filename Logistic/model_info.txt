@@ -1,0 +1,16 @@
+LOGISTIC REGRESSION MODEL INFORMATION
+==================================================
+
+Model Type: Logistic Regression
+Training Date: 2026-04-05 17:32:12.228590
+Test Accuracy: 0.9700 (97.00%)
+Training Accuracy: 0.9563 (95.62%)
+
+Sensitivity: 0.9741
+Specificity: 0.9643
+Precision: 0.9741
+F1-Score: 0.9741
+
+Number of Features: 12
+Training Samples: 800
+Testing Samples: 200
